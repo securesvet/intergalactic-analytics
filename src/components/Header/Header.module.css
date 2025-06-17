@@ -1,0 +1,17 @@
+:root {
+  --header-height: 45px;
+}
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+}
+
+.text-bg-accent {
+  background: var(--accent-color);
+}
+
+.text-uppercase {
+text-transform: uppercase;
+
+}
