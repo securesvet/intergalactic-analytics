@@ -59,3 +59,7 @@
 .white {
   background-color: var(--button-white);
 }
+
+.orange {
+  background-color: var(--color-warn);
+}

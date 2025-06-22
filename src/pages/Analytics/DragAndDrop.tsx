@@ -44,14 +44,14 @@ export default function DragAndDrop() {
 
   return (
     <div
-      className={`${styles["drag-container"]} ${isDragging ? styles["drag-hover"] : ""}`}
+      className={`${styles["drag-container"]} ${isDragging ? styles["drag-hover"] : ""} ${loadedFile.isError ? styles.error : ""}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       <div className={`${styles.flex} ${styles["flex-col"]}`}>
         <div className={styles.flex}>
-          <Button onClick={handleClick} size="xl" color="white">
+          <Button onClick={handleClick} size="xl" color={`${loadedFile.isError ? "orange" : "white"}`}>
             <input
               ref={inputRef}
               type="file"
@@ -70,7 +70,7 @@ export default function DragAndDrop() {
           )}
         </div>
         <Paragraph size="xl">
-          {loadedFile.loaded ? "файл загружен!" : "или перетащите сюда"}
+          {loadedFile.loaded ? loadedFile.isError ? "упс, не то..." : "файл загружен!" : "или перетащите сюда"}
         </Paragraph>
       </div>
     </div>

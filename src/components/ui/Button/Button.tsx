@@ -4,7 +4,7 @@ import { Loader } from "../icons";
 
 export type ButtonProps = {
   text?: string;
-  color?: "green" | "yellow" | "black" | "white";
+  color?: "green" | "yellow" | "black" | "white" | "orange";
   size?: "m" | "l" | "xl" | "xxl";
   isLoading?: boolean;
   loader?: ReactNode;

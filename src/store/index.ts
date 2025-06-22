@@ -17,6 +17,7 @@ type FileStore = {
   history: HistoryType[];
   loaded: boolean;
   file: File | null;
+  isError: boolean,
   isLoadingAnalytics: boolean,
   statsHistory: {
     total_spend_galactic: number;
@@ -54,14 +55,15 @@ export const useFileStore = create<FileStore>((set, get) => {
     loaded: false,
     history: storedHistory,
     file: null,
+    isError: false,
     isLoadingAnalytics: false,
     statsHistory: null,
     fileMetrics: {},
     changeFile: (file) => {
-      set({ loaded: true, file });
+      set({ loaded: true, file, isError: false });
     },
     clearFile: () => {
-      set({ loaded: false, file: null });
+      set({ loaded: false, file: null, isError: false });
     },
     sendFile: async ({ rows }) => {
       const { file } = get();
@@ -83,6 +85,7 @@ export const useFileStore = create<FileStore>((set, get) => {
         });
         if (!response.ok) {
           console.error("Server error:", response.status);
+          set({ isError: true });
           return;
         }
 
@@ -119,13 +122,14 @@ export const useFileStore = create<FileStore>((set, get) => {
               const final = JSON.parse(buffer);
               set({ statsHistory: final });
             } catch (e) {
-              console.warn("Trying final line:", buffer);
+              console.warn("No final line:", buffer);
             }
           }
         }
         isSuccessfull = true;
       }
       catch (e) {
+        set({ isError: true })
         console.error(e);
       }
       finally {
@@ -145,7 +149,6 @@ export const useFileStore = create<FileStore>((set, get) => {
           }
           return { history: updatedHistory };
         });
-        set({ loaded: false, file: null });
       }
     },
     generateFileLink: ({ size, withErrors = "off", maxSpend = 1000 }) => {

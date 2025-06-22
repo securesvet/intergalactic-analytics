@@ -36,3 +36,14 @@
 ul li {
   list-style: none;
 }
+
+.white {
+  color: #fff;
+}
+
+.buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}

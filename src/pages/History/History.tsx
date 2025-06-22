@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { Button, Paragraph } from "../../components/ui";
 import { File, TrashCan, Smile, SmileSad } from "../../components/ui/icons";
 import { useFileStore } from "../../store";
@@ -5,12 +6,16 @@ import { useFileStore } from "../../store";
 import styles from "./History.module.css";
 
 export default function History() {
+  const navigate = useNavigate();
   const deleteHistoryRow = useFileStore((state) => state.deleteHistoryRow);
   const history = useFileStore((state) => state.history);
   const clearHistory = useFileStore((state) => state.clearHistory);
+
+  const hasHistory = history && history.length > 0;
+
   return (
     <div className={styles.main}>
-      {history ?
+      {hasHistory ? (
         history.map(({ id, ...historyData }) => (
           <div key={id} className={styles.flex}>
             <HistoryRow {...historyData} />
@@ -18,12 +23,20 @@ export default function History() {
               <TrashCan />
             </Button>
           </div>
-        )) : <Paragraph size="xl">Нет истории файлов</Paragraph>}
-      <Paragraph size="xl">Нет истории файлов</Paragraph>
-      <div>
-        <Button color="white" onClick={() => clearHistory()}>
-          <TrashCan />
+        ))
+      ) : (
+        <Paragraph size="xl">Нет истории файлов</Paragraph>
+      )}
+
+      <div className={styles.buttons}>
+        <Button size="xl" onClick={() => navigate("/")}>
+          <b>Сгенерировать больше</b>
         </Button>
+        {hasHistory && (
+          <Button color="black" size="xl" onClick={clearHistory}>
+            <b className={styles.white}>Очистить всё</b>
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -44,20 +57,16 @@ export function HistoryRow({
         <File /> {name}
       </li>
       <li className={styles["row--item"]}>
-        {new Date(date).toLocaleDateString('ru-RU', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
+        {new Date(date).toLocaleDateString("ru-RU", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
         })}
       </li>
-      <li
-        className={`${styles["row--item"]} ${isSuccessfull ? "" : styles.disabled}`}
-      >
+      <li className={`${styles["row--item"]} ${isSuccessfull ? "" : styles.disabled}`}>
         Обработан успешно <Smile />
       </li>
-      <li
-        className={`${styles["row--item"]} ${isSuccessfull ? styles.disabled : ""}`}
-      >
+      <li className={`${styles["row--item"]} ${isSuccessfull ? styles.disabled : ""}`}>
         Не удалось обработать <SmileSad />
       </li>
     </ul>

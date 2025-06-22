@@ -33,6 +33,7 @@
   --drag-error-color: #ff5f00;
   --underline-border: 2px solid var(--base-color);
 
+  --color-warn: #FF5F00;
   --button-dark: #201b10;
   --button-white: #fff;
   --button-ready: #2ae881;
