@@ -1,5 +1,5 @@
-import Button, { type ButtonProps } from "./Button.tsx";
-import styles from "./ButtonUpload.module.css";
+import Button, { type ButtonProps } from './Button.tsx';
+import styles from './ButtonUpload.module.css';
 
 export default function ButtonUpload({
   children,

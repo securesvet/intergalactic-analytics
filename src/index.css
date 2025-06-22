@@ -1,5 +1,5 @@
 :root {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -33,7 +33,7 @@
   --drag-error-color: #ff5f00;
   --underline-border: 2px solid var(--base-color);
 
-  --color-warn: #FF5F00;
+  --color-warn: #ff5f00;
   --button-dark: #201b10;
   --button-white: #fff;
   --button-ready: #2ae881;

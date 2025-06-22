@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 type GenerateFileOptions = {
   size: number;
@@ -17,8 +17,8 @@ type FileStore = {
   history: HistoryType[];
   loaded: boolean;
   file: File | null;
-  isError: boolean,
-  isLoadingAnalytics: boolean,
+  isError: boolean;
+  isLoadingAnalytics: boolean;
   statsHistory: {
     total_spend_galactic: number;
     rows_affected: number;
@@ -38,7 +38,7 @@ type FileStore = {
   clearHistory: () => void;
 };
 
-const HISTORY_KEY = "history";
+const HISTORY_KEY = 'history';
 
 export const useFileStore = create<FileStore>((set, get) => {
   const storedHistory = (() => {
@@ -46,7 +46,7 @@ export const useFileStore = create<FileStore>((set, get) => {
       const raw = window.localStorage.getItem(HISTORY_KEY);
       return raw ? (JSON.parse(raw) as HistoryType[]) : [];
     } catch (e) {
-      console.error("Failed to load history from localStorage", e);
+      console.error('Failed to load history from localStorage', e);
       return [];
     }
   })();
@@ -68,30 +68,33 @@ export const useFileStore = create<FileStore>((set, get) => {
     sendFile: async ({ rows }) => {
       const { file } = get();
       if (!file) {
-        console.error("No file to send");
+        console.error('No file to send');
         return;
       }
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append('file', file);
 
       set({ isLoadingAnalytics: true });
 
       let isSuccessfull = false;
 
       try {
-        const response = await fetch(`http://localhost:3000/aggregate?rows=${rows}`, {
-          method: "POST",
-          body: formData
-        });
+        const response = await fetch(
+          `http://localhost:3000/aggregate?rows=${rows}`,
+          {
+            method: 'POST',
+            body: formData,
+          },
+        );
         if (!response.ok) {
-          console.error("Server error:", response.status);
+          console.error('Server error:', response.status);
           set({ isError: true });
           return;
         }
 
         const reader = response.body?.getReader();
-        const decoder = new TextDecoder("utf-8");
-        let buffer = "";
+        const decoder = new TextDecoder('utf-8');
+        let buffer = '';
 
         if (reader) {
           while (true) {
@@ -100,7 +103,7 @@ export const useFileStore = create<FileStore>((set, get) => {
 
             buffer += decoder.decode(value, { stream: true });
 
-            let lines = buffer.split("\n");
+            const lines = buffer.split('\n');
             buffer = lines.pop()!;
 
             for (const line of lines) {
@@ -108,11 +111,9 @@ export const useFileStore = create<FileStore>((set, get) => {
 
               try {
                 const parsed = JSON.parse(line);
-                console.log(parsed);
                 set({ statsHistory: parsed });
-
               } catch (e) {
-                console.warn("Skipping:", line);
+                console.warn('Skipping:', e, line);
               }
             }
           }
@@ -122,51 +123,54 @@ export const useFileStore = create<FileStore>((set, get) => {
               const final = JSON.parse(buffer);
               set({ statsHistory: final });
             } catch (e) {
-              console.warn("No final line:", buffer);
+              console.warn('No final line:', e, buffer);
             }
           }
         }
         isSuccessfull = true;
-      }
-      catch (e) {
-        set({ isError: true })
+      } catch (e) {
+        set({ isError: true });
         console.error(e);
-      }
-      finally {
+      } finally {
         set({ isLoadingAnalytics: false });
         set((state) => {
           const newItem = {
             id: Date.now(),
             name: file.name,
             date: new Date(),
-            isSuccessfull
+            isSuccessfull,
           };
           const updatedHistory = [...state.history, newItem];
           try {
-            window.localStorage.setItem("history", JSON.stringify(updatedHistory));
+            window.localStorage.setItem(
+              'history',
+              JSON.stringify(updatedHistory),
+            );
           } catch (e) {
-            console.error("Error writing to localStorage", e);
+            console.error('Error writing to localStorage', e);
           }
           return { history: updatedHistory };
         });
       }
     },
-    generateFileLink: ({ size, withErrors = "off", maxSpend = 1000 }) => {
+    generateFileLink: ({ size, withErrors = 'off', maxSpend = 1000 }) => {
       return `http://localhost:3000/report?size=${size}&withErrors=${withErrors}&maxSpend=${maxSpend}`;
     },
     addHistoryRow: (newItem: HistoryType) => {
       set((state) => {
         const updatedHistory = [...state.history, newItem];
         try {
-          window.localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
+          window.localStorage.setItem(
+            HISTORY_KEY,
+            JSON.stringify(updatedHistory),
+          );
         } catch (e) {
-          console.error("Error writing to localStorage", e);
+          console.error('Error writing to localStorage', e);
         }
         return { history: updatedHistory };
       });
     },
     deleteHistoryRow: (idToDelete) => {
-      console.log("DELETE HISTORY ROW");
       set((state) => {
         const updatedHistory = state.history.filter(
           ({ id }) => id !== idToDelete,
@@ -177,7 +181,7 @@ export const useFileStore = create<FileStore>((set, get) => {
             JSON.stringify(updatedHistory),
           );
         } catch (e) {
-          console.log("Error saving to local storage: ", e);
+          console.error('Error saving to local storage: ', e);
         }
         return { history: updatedHistory };
       });
@@ -187,12 +191,12 @@ export const useFileStore = create<FileStore>((set, get) => {
         try {
           window.localStorage.removeItem(HISTORY_KEY);
         } catch (e) {
-          console.log("Error saving to local storage: ", e);
+          console.error('Error saving to local storage: ', e);
         }
         return {
-          history: []
-        }
+          history: [],
+        };
       });
-    }
+    },
   };
 });

@@ -1,8 +1,8 @@
-import { Button, ButtonUpload, Paragraph } from "../../components/ui";
-import { Close } from "../../components/ui/icons";
-import { useState } from "react";
-import styles from "./Generator.module.css";
-import { useFileStore } from "../../store";
+import { Button, ButtonUpload, Paragraph } from '../../components/ui';
+import { Close } from '../../components/ui/icons';
+import { useState } from 'react';
+import styles from './Generator.module.css';
+import { useFileStore } from '../../store';
 
 export default function Generator() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,17 +16,19 @@ export default function Generator() {
     setError(false);
 
     try {
-      const response = await fetch(generateFileLink({ size: 0.01 }), { method: "GET" });
+      const response = await fetch(generateFileLink({ size: 0.01 }), {
+        method: 'GET',
+      });
 
       if (!response.ok) {
-        throw new Error("Ошибка при генерации файла");
+        throw new Error('Ошибка при генерации файла');
       }
 
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = url;
-      a.download = "report.csv";
+      a.download = 'report.csv';
       document.body.appendChild(a);
 
       a.click();
@@ -36,7 +38,7 @@ export default function Generator() {
         document.body.removeChild(a);
       }, delay);
     } catch (error) {
-      console.error("Download failed:", error);
+      console.error('Download failed:', error);
       setError(true);
     } finally {
       setIsLoading(false);
@@ -45,20 +47,34 @@ export default function Generator() {
   };
 
   return (
-    <div className={`${styles["flex-col"]} ${styles.main}`}>
-      <Paragraph size="xl">
+    <div className={`${styles['flex-col']} ${styles.main}`}>
+      <Paragraph size='xl'>
         Сгенерируйте готовый CSV-файл нажатием одной кнопки
       </Paragraph>
       <div className={styles.flex}>
-        <ButtonUpload isLoading={isLoading} onClick={handleClick} size="xl" color={`${error ? "orange" : "green"}`}>
-          {
-            error ? "Ошибка" : isDone ? "Done" : <b>Начать генерацию</b>
-          }
+        <ButtonUpload
+          isLoading={isLoading}
+          onClick={handleClick}
+          size='xl'
+          color={`${error ? 'orange' : 'green'}`}
+        >
+          {error ? 'Ошибка' : isDone ? 'Done' : <b>Начать генерацию</b>}
         </ButtonUpload>
-        {error || isDone && <Button color="black" onClick={() => { setError(false); setIsDone(false) }}><Close /></Button>}
+        {error ||
+          (isDone && (
+            <Button
+              color='black'
+              onClick={() => {
+                setError(false);
+                setIsDone(false);
+              }}
+            >
+              <Close />
+            </Button>
+          ))}
       </div>
-      {error && <Paragraph size="xl">упс, не то...</Paragraph>}
-      {isDone && <Paragraph size="xl">файл сгенерирован!</Paragraph>}
+      {error && <Paragraph size='xl'>упс, не то...</Paragraph>}
+      {isDone && <Paragraph size='xl'>файл сгенерирован!</Paragraph>}
     </div>
   );
 }

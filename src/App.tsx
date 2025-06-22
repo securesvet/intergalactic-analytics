@@ -1,6 +1,6 @@
-import { Header } from "./components";
-import { Analytics, Generator, History } from "./pages";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { Header } from './components';
+import { Analytics, Generator, History } from './pages';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
       <main>
         <Routes>
           <Route index element={<Analytics />} />
-          <Route path="generator" element={<Generator />} />
-          <Route path="history" element={<History />} />
+          <Route path='generator' element={<Generator />} />
+          <Route path='history' element={<History />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import styles from "./DragAndDrop.module.css";
-import { Button, Paragraph } from "../../components/ui";
-import { Close } from "../../components/ui/icons";
-import { useFileStore } from "../../store";
+import { useState, useRef } from 'react';
+import styles from './DragAndDrop.module.css';
+import { Button, Paragraph } from '../../components/ui';
+import { Close } from '../../components/ui/icons';
+import { useFileStore } from '../../store';
 
 export default function DragAndDrop() {
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -36,39 +36,47 @@ export default function DragAndDrop() {
       loadedFile.changeFile(files[0]);
     }
     if (inputRef.current) {
-      inputRef.current.value = "";
+      inputRef.current.value = '';
     }
   };
 
   return (
     <div
-      className={`${styles["drag-container"]} ${isDragging ? styles["drag-hover"] : ""} ${loadedFile.isError ? styles.error : ""}`}
+      className={`${styles['drag-container']} ${isDragging ? styles['drag-hover'] : ''} ${loadedFile.isError ? styles.error : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <div className={`${styles.flex} ${styles["flex-col"]}`}>
+      <div className={`${styles.flex} ${styles['flex-col']}`}>
         <div className={styles.flex}>
-          <Button onClick={handleClick} size="xl" color={`${loadedFile.isError ? "orange" : "white"}`}>
+          <Button
+            onClick={handleClick}
+            size='xl'
+            color={`${loadedFile.isError ? 'orange' : 'white'}`}
+          >
             <input
               ref={inputRef}
-              type="file"
-              accept=".csv"
-              style={{ display: "none" }}
+              type='file'
+              accept='.csv'
+              style={{ display: 'none' }}
               onChange={handleFileChange}
             />
-            {loadedFile.loaded ? loadedFile.file?.name : "Загрузить файл"}
+            {loadedFile.loaded ? loadedFile.file?.name : 'Загрузить файл'}
           </Button>
           {loadedFile.loaded ? (
-            <Button color="black" onClick={() => loadedFile.clearFile()}>
+            <Button color='black' onClick={() => loadedFile.clearFile()}>
               <Close />
             </Button>
           ) : (
-            ""
+            ''
           )}
         </div>
-        <Paragraph size="xl">
-          {loadedFile.loaded ? loadedFile.isError ? "упс, не то..." : "файл загружен!" : "или перетащите сюда"}
+        <Paragraph size='xl'>
+          {loadedFile.loaded
+            ? loadedFile.isError
+              ? 'упс, не то...'
+              : 'файл загружен!'
+            : 'или перетащите сюда'}
         </Paragraph>
       </div>
     </div>
