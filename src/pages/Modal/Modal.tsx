@@ -26,13 +26,17 @@ export function ModalWithStats({ onClose }: { onClose: () => void }) {
       <div className={styles.backdrop} onClick={onClose}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <div className={styles.statsGrid}>
-            {Object.entries(statsHistory).map(([key, value]) => (
-              <InfoRow
-                key={key}
-                title={String(typeof value === "string" ? value : Math.floor(value))}
-                description={valueToDescription[key] || key}
-              />
-            ))}
+            {Object.entries(statsHistory).map(([key, value]) => {
+              if (!valueToDescription[key]) return;
+              return (
+                <InfoRow
+                  key={key}
+                  title={String(typeof value === "string" ? value : Math.floor(value))}
+                  description={valueToDescription[key] || key}
+                />
+              )
+            }
+            )}
           </div>
         </div>
       </div>
