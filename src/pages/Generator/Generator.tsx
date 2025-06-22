@@ -60,8 +60,8 @@ export default function Generator() {
         >
           {error ? 'Ошибка' : isDone ? 'Done' : <b>Начать генерацию</b>}
         </ButtonUpload>
-        {error ||
-          (isDone && (
+        {(error ||
+          isDone) && (
             <Button
               color='black'
               onClick={() => {
@@ -71,10 +71,10 @@ export default function Generator() {
             >
               <Close />
             </Button>
-          ))}
+          )}
       </div>
       {error && <Paragraph size='xl'>упс, не то...</Paragraph>}
-      {isDone && <Paragraph size='xl'>файл сгенерирован!</Paragraph>}
+      {!error && isDone && <Paragraph size='xl'>файл сгенерирован!</Paragraph>}
     </div>
   );
 }
