@@ -35,8 +35,6 @@ export default function DragAndDrop() {
     if (files) {
       loadedFile.changeFile(files[0]);
     }
-    console.log("Selected files:", files);
-    console.log("Dropped files:", files);
     if (inputRef.current) {
       inputRef.current.value = "";
     }

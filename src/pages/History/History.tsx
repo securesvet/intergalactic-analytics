@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Button, Paragraph } from "../../components/ui";
 import { File, TrashCan, Smile, SmileSad } from "../../components/ui/icons";
 import { useFileStore } from "../../store";
+import { ModalWithStats } from "../Modal/Modal.tsx";
 
 import styles from "./History.module.css";
 
@@ -10,11 +12,23 @@ export default function History() {
   const deleteHistoryRow = useFileStore((state) => state.deleteHistoryRow);
   const history = useFileStore((state) => state.history);
   const clearHistory = useFileStore((state) => state.clearHistory);
+  const statsHistory = useFileStore((state) => state.statsHistory);
+  const file = useFileStore((state) => state.file);
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (statsHistory && file && history) {
+      setShowModal(true);
+    }
+  }, [statsHistory]);
 
   const hasHistory = history && history.length > 0;
 
   return (
     <div className={styles.main}>
+      {showModal && <ModalWithStats onClose={() => setShowModal(false)} />}
+
       {hasHistory ? (
         history.map(({ id, ...historyData }) => (
           <div key={id} className={styles.flex}>
