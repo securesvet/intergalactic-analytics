@@ -1,4 +1,4 @@
-import { useState, type ReactNode, useRef } from "react";
+import { useState, useRef } from "react";
 import styles from "./DragAndDrop.module.css";
 import { Button, Paragraph } from "../../components/ui";
 import { Close } from "../../components/ui/icons";
@@ -59,7 +59,7 @@ export default function DragAndDrop() {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-            {loadedFile.loaded ? loadedFile.name : "Загрузить файл"}
+            {loadedFile.loaded ? loadedFile.file?.name : "Загрузить файл"}
           </Button>
           {loadedFile.loaded ? (
             <Button color="black" onClick={() => loadedFile.clearFile()}>

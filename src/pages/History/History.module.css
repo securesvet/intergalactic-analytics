@@ -14,6 +14,7 @@
 
 .main {
   margin-top: var(--header-main-gap);
+  text-align: center;
   display: flex;
   flex-direction: column;
   gap: 10px;

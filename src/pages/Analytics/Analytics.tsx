@@ -14,7 +14,7 @@ export default function Analytics() {
           за сверхнизкое время
         </Paragraph>
         <DragAndDrop />
-        <ButtonUpload disabled={!file.loaded} onClick={() => {}} size="xxl">
+        <ButtonUpload disabled={!file.loaded} isLoading={file.isLoadingAnalytics} onClick={() => { file.sendFile({ rows: 10000 }) }} size="xxl">
           <b>Отправить</b>
         </ButtonUpload>
       </div>
