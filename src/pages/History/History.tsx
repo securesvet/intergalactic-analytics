@@ -13,15 +13,14 @@ export default function History() {
   const history = useFileStore((state) => state.history);
   const clearHistory = useFileStore((state) => state.clearHistory);
   const statsHistory = useFileStore((state) => state.statsHistory);
-  const file = useFileStore((state) => state.file);
 
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (statsHistory && file && history) {
+    if (statsHistory) {
       setShowModal(true);
     }
-  }, [statsHistory, file, history]);
+  }, [statsHistory]);
 
   const hasHistory = history && history.length > 0;
 
