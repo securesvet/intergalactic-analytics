@@ -10,7 +10,8 @@ export default function Analytics() {
     <div>
       <div className={`${styles.flex} ${styles.main}`}>
         <Paragraph size='xl'>
-          Загрузите <b>csv</b> файл и получите <b>полную информацию</b> о нём за сверхнизкое время
+          Загрузите <b>csv</b> файл и получите <b>полную информацию</b> о нём
+          за сверхнизкое время
         </Paragraph>
         <DragAndDrop />
         {!file.isError && (
