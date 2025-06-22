@@ -7,9 +7,17 @@
 }
 
 .main {
+  margin-top: 20px;
   min-height: 400px;
 }
 
 .p {
   color: var(--accent-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
 }

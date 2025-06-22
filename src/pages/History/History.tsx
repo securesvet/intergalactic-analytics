@@ -8,7 +8,6 @@ export default function History() {
   const deleteHistoryRow = useFileStore((state) => state.deleteHistoryRow);
   const history = useFileStore((state) => state.history);
   const clearHistory = useFileStore((state) => state.clearHistory);
-  console.log(history)
   return (
     <div className={styles.main}>
       {history ?
@@ -44,7 +43,13 @@ export function HistoryRow({
       <li className={styles["row--item"]}>
         <File /> {name}
       </li>
-      <li className={styles["row--item"]}>{date.toLocaleDateString('ru-RU', { year: 'numeric', month: '2-digit', day: '2-digit' })}</li>
+      <li className={styles["row--item"]}>
+        {new Date(date).toLocaleDateString('ru-RU', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        })}
+      </li>
       <li
         className={`${styles["row--item"]} ${isSuccessfull ? "" : styles.disabled}`}
       >

@@ -9,7 +9,7 @@ type InfoRowProps = {
 export default function InfoRow({ title, description }: InfoRowProps) {
   return (
     <div className={styles.row}>
-      <Paragraph size="xl">{title}</Paragraph>
+      <Paragraph size="xl"><b>{title}</b></Paragraph>
       <Paragraph>{description}</Paragraph>
     </div>
   )
