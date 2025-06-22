@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main {
+  margin-top: var(--header-main-gap);
+}

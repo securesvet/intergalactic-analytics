@@ -1,0 +1,22 @@
+.drag-container {
+  background-color: var(--drag-bg-color);
+  padding: 5px;
+  border-radius: var(--radius);
+  width: 90%;
+  padding: 40px;
+}
+
+.drag-hover {
+  background-color: var(--drag-on-bg-color);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.flex-col {
+  flex-direction: column;
+}

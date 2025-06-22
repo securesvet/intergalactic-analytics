@@ -1,17 +1,20 @@
-import { useState } from 'react'
-import { Header } from './components';
+import { Header } from "./components";
+import { Analytics, Generator, History } from "./pages";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <div>
-        <p>intergalactic-analytics</p>
-      </div>
-    </>
-  )
+      <main>
+        <Routes>
+          <Route index element={<Analytics />} />
+          <Route path="generator" element={<Generator />} />
+          <Route path="history" element={<History />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,37 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--accent-color);
+  border-radius: var(--window-radius);
+  width: 100%;
+  padding: 16px 20px;
+}
+
+.disabled {
+  color: var(--text-disabled);
+}
+
+.main {
+  margin-top: var(--header-main-gap);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.row--item {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+ul li {
+  list-style: none;
+}

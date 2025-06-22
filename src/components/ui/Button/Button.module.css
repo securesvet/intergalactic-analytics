@@ -1,0 +1,61 @@
+.button {
+  border-radius: var(--btn-radius);
+  border: 0;
+  padding: 5px;
+  min-width: 70px;
+  min-height: 70px;
+}
+
+.button:hover {
+  cursor: pointer;
+  transition: opacity 250ms;
+  opacity: 0.8;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  background-color: var(--button-disabled);
+  color: var(--text-disabled);
+  cursor: default;
+}
+
+.loading {
+  background-color: var(--bg-loading);
+}
+
+.m {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.l {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.125rem;
+}
+
+.xl {
+  padding: 1rem 1.5rem;
+  font-size: var(--text-size-xl);
+}
+
+.xxl {
+  padding: 1rem 1.5rem;
+  font-size: var(--text-size-xxl);
+}
+
+.green {
+  background-color: var(--button-ready);
+}
+
+.yellow {
+  background-color: var(--button-steady);
+}
+
+.black {
+  background-color: var(--button-dark);
+  color: white;
+}
+
+.white {
+  background-color: var(--button-white);
+}
