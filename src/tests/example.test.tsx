@@ -8,6 +8,5 @@ describe("Преобразование ключа статистики в опи
     const result = valueToDescription['total_spend_galactic']
 
     expect(result).toBe("общие расходы в галактических кредитах")
-
   })
 })
