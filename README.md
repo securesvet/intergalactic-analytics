@@ -41,3 +41,9 @@ npm run dev
 ### configuration files
 
 Файлы конфигурации в корне проекта: eslint + prettier
+
+## Tests
+
+Тесты находятся по пути `src/tests`
+
+Чтобы запустить тесты надо прописать `npm run test`
