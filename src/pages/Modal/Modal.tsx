@@ -22,7 +22,7 @@ export function ModalWithStats({ onClose }: { onClose: () => void }) {
   if (!statsHistory) return null;
 
   return ReactDOM.createPortal(
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="modal">
       <div className={styles.backdrop} onClick={onClose}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <div className={styles.statsGrid}>

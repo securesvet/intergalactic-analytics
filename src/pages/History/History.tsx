@@ -14,13 +14,13 @@ export default function History() {
   const clearHistory = useFileStore((state) => state.clearHistory);
   const statsHistory = useFileStore((state) => state.statsHistory);
 
-  const [showModal, setShowModal] = useState(false);
-
   useEffect(() => {
     if (statsHistory) {
       setShowModal(true);
     }
   }, [statsHistory]);
+
+  const [showModal, setShowModal] = useState(false);
 
   const hasHistory = history && history.length > 0;
 
@@ -42,11 +42,11 @@ export default function History() {
       )}
 
       <div className={styles.buttons}>
-        <Button size='xl' onClick={() => navigate('/')}>
+        <Button size='xl' onClick={() => navigate('/generator')} data-testid="generate-more">
           <b>Сгенерировать больше</b>
         </Button>
         {hasHistory && (
-          <Button color='black' size='xl' onClick={clearHistory}>
+          <Button color='black' size='xl' onClick={clearHistory} data-testid="clearHistory">
             <b className={styles.white}>Очистить всё</b>
           </Button>
         )}

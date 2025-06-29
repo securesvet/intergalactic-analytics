@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <nav className={styles.menu}>
+      <nav className={styles.menu} nav-testid="nav">
         <li className={styles['menu-left']}>
           <img src={logo} alt='logo' />
           <div className={styles.title__container}>
@@ -20,14 +20,14 @@ const Header = () => {
           </div>
         </li>
         <li className={styles['menu-right']}>
-          <Link to={`/`}>
+          <Link to={`/`} data-testid="analytics">
             <img
               src={csv_analytics}
               alt='Analytics'
               className={location.pathname === '/' ? styles.active : ''}
             />
           </Link>
-          <Link to={`/generator`}>
+          <Link to={`/generator`} data-testid="generator">
             <img
               src={csv_generator}
               alt='Generator'
@@ -36,7 +36,7 @@ const Header = () => {
               }
             />
           </Link>
-          <Link to={`/history`}>
+          <Link to={`/history`} data-testid="history">
             <img
               src={csv_history}
               alt='History'

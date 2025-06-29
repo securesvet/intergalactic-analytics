@@ -46,6 +46,8 @@ export default function Generator() {
     }
   };
 
+  console.log(error);
+
   return (
     <div className={`${styles['flex-col']} ${styles.main}`}>
       <Paragraph size='xl'>
@@ -57,6 +59,7 @@ export default function Generator() {
           onClick={handleClick}
           size='xl'
           color={`${error ? 'orange' : 'green'}`}
+          data-testid="button-upload"
         >
           {error ? 'Ошибка' : isDone ? 'Done' : <b>Начать генерацию</b>}
         </ButtonUpload>
@@ -68,6 +71,7 @@ export default function Generator() {
                 setError(false);
                 setIsDone(false);
               }}
+              data-testid="button-close"
             >
               <Close />
             </Button>

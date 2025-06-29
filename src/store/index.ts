@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
-type GenerateFileOptions = {
+export type GenerateFileOptions = {
   size: number;
   withErrors?: string;
   maxSpend?: string;
 };
 
-type HistoryType = {
+export type HistoryType = {
   id: number;
   name: string;
   date: Date;
