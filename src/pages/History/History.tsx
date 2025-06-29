@@ -31,7 +31,7 @@ export default function History() {
       {hasHistory ? (
         history.map(({ id, ...historyData }) => (
           <div key={id} className={styles.flex}>
-            <HistoryRow {...historyData} />
+            <HistoryRow {...historyData} onClick={() => setShowModal(historyData.isSuccessfull)} />
             <Button color='white' onClick={() => deleteHistoryRow(id)}>
               <TrashCan />
             </Button>
@@ -59,13 +59,15 @@ export function HistoryRow({
   name,
   date,
   isSuccessfull,
+  onClick
 }: {
   name: string;
   date: Date;
   isSuccessfull: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <ul className={styles.row}>
+    <ul className={styles.row} onClick={onClick} style={{ cursor: isSuccessfull ? 'pointer' : 'default' }}>
       <li className={styles['row--item']}>
         <File /> {name}
       </li>

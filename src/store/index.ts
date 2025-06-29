@@ -11,6 +11,7 @@ type HistoryType = {
   name: string;
   date: Date;
   isSuccessfull: boolean;
+  stats?: FileStore['statsHistory'];
 };
 
 type FileStore = {
@@ -134,11 +135,13 @@ export const useFileStore = create<FileStore>((set, get) => {
       } finally {
         set({ isLoadingAnalytics: false });
         set((state) => {
+          const stats = state.statsHistory;
           const newItem = {
             id: Date.now(),
             name: file.name,
             date: new Date(),
             isSuccessfull,
+            stats
           };
           const updatedHistory = [...state.history, newItem];
           try {
